@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { PostHogClient } from "@/components/analytics/PostHogClient";
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <PostHogClient />
         <ToastProvider>{children}</ToastProvider>
+        <Analytics />
       </body>
     </html>
   );
