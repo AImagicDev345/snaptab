@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { ChevronDown } from "lucide-react";
 
 import { createSessionAndRedirect } from "@/app/actions/sessions";
@@ -14,9 +14,13 @@ import { setLocalParticipantId } from "@/lib/localParticipant";
 
 import { ItemsEditor, type ItemDraft } from "./ItemsEditor";
 
+// Force a stable locale so SSR and client hydration produce the same symbol.
+// (Reading navigator.language during render — even indirectly via `undefined`
+// locale — causes hydration mismatches when the browser locale differs from
+// Node's default.)
 function currencySymbol(code: string): string {
   try {
-    const parts = new Intl.NumberFormat(undefined, {
+    const parts = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: code,
       currencyDisplay: "narrowSymbol",
@@ -40,8 +44,13 @@ export function NewBillForm() {
   const toast = useToast();
   const [pending, startTransition] = useTransition();
 
-  const defaultCurrency = useMemo(() => detectCurrencyCode(), []);
-  const [currencyCode, setCurrencyCode] = useState<string>(defaultCurrency);
+  // Currency starts as a stable server-safe default so initial hydration matches.
+  // We upgrade to the user's regional currency in the effect below, after mount.
+  const [currencyCode, setCurrencyCode] = useState<string>("USD");
+  useEffect(() => {
+    const detected = detectCurrencyCode();
+    if (detected && detected !== "USD") setCurrencyCode(detected);
+  }, []);
   const [title, setTitle] = useState<string>("");
   const [hostNickname, setHostNickname] = useState<string>("");
   const [tax, setTax] = useState<string>("");

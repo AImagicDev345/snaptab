@@ -1,18 +1,17 @@
 // Currency + nickname helpers.
 
-export function formatMoney(amount: number, currencyCode = "USD", locale?: string): string {
-  const detectedLocale =
-    locale ??
-    (typeof navigator !== "undefined" && navigator.language ? navigator.language : "en-US");
+// Always uses a fixed locale so server SSR and client hydration produce identical
+// text. Reading navigator.language here would cause hydration mismatches whenever
+// the user's browser locale differs from the SSR runtime's default.
+export function formatMoney(amount: number, currencyCode = "USD", locale = "en-US"): string {
   try {
-    return new Intl.NumberFormat(detectedLocale, {
+    return new Intl.NumberFormat(locale, {
       style: "currency",
       currency: currencyCode,
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(amount);
   } catch {
-    // Invalid currency code → fall back to a plain USD-style format.
     return `$${amount.toFixed(2)}`;
   }
 }
