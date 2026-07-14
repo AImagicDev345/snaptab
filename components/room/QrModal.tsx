@@ -34,13 +34,12 @@ export function QrModal({ open, onClose, url }: Props) {
     <Modal open={open} onClose={onClose} title="Scan to join">
       <div className="flex flex-col items-center gap-3">
         <div
-          className="overflow-hidden rounded-2xl bg-neutral-950 p-2"
+          className="overflow-hidden rounded-2xl border border-line bg-white p-3"
           aria-label="QR code to join this bill"
-          // The generated SVG is fully self-contained. Safe to inject.
           dangerouslySetInnerHTML={svg ? { __html: svg } : undefined}
         />
-        {!svg ? <div className="h-64 w-64 animate-pulse rounded-2xl bg-neutral-900" /> : null}
-        <p className="text-center text-sm text-neutral-400 break-all">{url}</p>
+        {!svg ? <div className="h-64 w-64 animate-pulse rounded-2xl bg-surface-strong" /> : null}
+        <p className="text-center text-sm text-fg-muted break-all">{url}</p>
       </div>
     </Modal>
   );

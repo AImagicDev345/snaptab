@@ -16,7 +16,7 @@ export function JoinTableModal({ open, onJoin, submitting }: Props) {
   const [nickname, setNickname] = useState("");
   return (
     <Modal open={open} onClose={() => {}} title="Join this bill" hideClose>
-      <p className="mb-4 text-sm text-neutral-400">
+      <p className="mb-4 text-sm text-fg-muted">
         Pick a nickname so everyone knows which items are yours. No account needed.
       </p>
       <form

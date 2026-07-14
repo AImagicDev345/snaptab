@@ -21,23 +21,31 @@ const steps = [
 export function HowItWorks() {
   return (
     <section aria-labelledby="how-heading" className="space-y-4">
-      <h2 id="how-heading" className="text-xl font-semibold text-neutral-100">
-        How it works
-      </h2>
-      <ol className="space-y-3">
+      <div className="space-y-1">
+        <h2 id="how-heading" className="text-xl font-semibold text-fg lg:text-2xl">
+          How it works
+        </h2>
+        <p className="hidden text-sm text-fg-muted lg:block">
+          Three steps. No login, no app store, no waiting on anyone.
+        </p>
+      </div>
+      <ol className="grid gap-3 lg:grid-cols-3 lg:gap-4">
         {steps.map((step, index) => {
           const Icon = step.icon;
           return (
-            <li key={step.title} className="flex gap-3 rounded-2xl border border-neutral-800 bg-neutral-900/60 p-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400">
-                <Icon className="h-5 w-5" aria-hidden />
+            <li
+              key={step.title}
+              className="flex gap-3 rounded-2xl border border-line bg-surface p-3 lg:flex-col lg:gap-4 lg:p-5"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent lg:h-12 lg:w-12">
+                <Icon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden />
               </div>
               <div>
-                <div className="flex items-center gap-2 text-sm font-semibold text-neutral-100">
-                  <span className="text-neutral-500">{index + 1}.</span>
+                <div className="flex items-center gap-2 text-sm font-semibold text-fg lg:text-base">
+                  <span className="text-fg-subtle">{index + 1}.</span>
                   {step.title}
                 </div>
-                <p className="text-sm text-neutral-400">{step.body}</p>
+                <p className="mt-1 text-sm text-fg-muted">{step.body}</p>
               </div>
             </li>
           );

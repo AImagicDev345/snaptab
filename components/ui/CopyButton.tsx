@@ -45,13 +45,13 @@ export function CopyButton({ value, label = "Copy link", className = "", onCopie
       type="button"
       onClick={handleCopy}
       className={[
-        "press no-tap-highlight inline-flex items-center gap-2 rounded-xl bg-neutral-800 px-3 py-2 text-sm font-medium text-neutral-100 hover:bg-neutral-700",
+        "press no-tap-highlight inline-flex items-center gap-2 rounded-xl border border-line bg-surface px-3 py-2 text-sm font-medium text-fg hover:bg-surface-strong",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      {copied ? <Check className="h-4 w-4 text-amber-400" /> : <Copy className="h-4 w-4" />}
+      {copied ? <Check className="h-4 w-4 text-accent" /> : <Copy className="h-4 w-4" />}
       {copied ? "Copied" : label}
     </button>
   );

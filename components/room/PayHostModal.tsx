@@ -59,13 +59,13 @@ export function PayHostModal({ open, onClose, session, amount, viewer, host }: P
   return (
     <Modal open={open} onClose={onClose} title="Pay the host">
       <div className="space-y-4">
-        <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-3 text-center">
-          <div className="text-xs uppercase tracking-wide text-neutral-500">Your share</div>
-          <div className="text-3xl font-black text-amber-400">
+        <div className="rounded-2xl border border-line bg-surface p-3 text-center">
+          <div className="text-xs uppercase tracking-wide text-fg-subtle">Your share</div>
+          <div className="text-3xl font-black text-accent">
             {formatMoney(amount, session.currency_code)}
           </div>
           {host ? (
-            <div className="mt-1 text-xs text-neutral-500">to {host.nickname}</div>
+            <div className="mt-1 text-xs text-fg-subtle">to {host.nickname}</div>
           ) : null}
         </div>
 
@@ -82,18 +82,18 @@ export function PayHostModal({ open, onClose, session, amount, viewer, host }: P
             ))}
           </div>
         ) : (
-          <p className="rounded-xl border border-neutral-800 bg-neutral-900 p-3 text-xs text-neutral-400">
+          <p className="rounded-xl border border-line bg-surface p-3 text-xs text-fg-muted">
             No payment handles set for this bill. Copy the message below and send it however you like.
           </p>
         )}
 
-        <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-3">
-          <div className="mb-2 text-xs uppercase tracking-wide text-neutral-500">Message</div>
-          <p className="whitespace-pre-wrap text-sm text-neutral-200">{message}</p>
+        <div className="rounded-2xl border border-line bg-surface p-3">
+          <div className="mb-2 text-xs uppercase tracking-wide text-fg-subtle">Message</div>
+          <p className="whitespace-pre-wrap text-sm text-fg">{message}</p>
           <button
             type="button"
             onClick={copyMessage}
-            className="press mt-2 inline-flex items-center gap-2 rounded-xl bg-neutral-800 px-3 py-2 text-sm font-medium text-neutral-100 hover:bg-neutral-700"
+            className="press mt-2 inline-flex items-center gap-2 rounded-xl border border-line bg-surface-strong px-3 py-2 text-sm font-medium text-fg hover:bg-app"
           >
             <Copy className="h-4 w-4" />
             {copied ? "Copied" : "Copy message"}

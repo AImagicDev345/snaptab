@@ -2,14 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-}
+@layer base {
+  :root {
+    /* Light palette — default */
+    --app: 0 0% 100%;              /* page background */
+    --surface: 30 20% 98%;         /* card background (warm neutral) */
+    --surface-strong: 30 20% 95%;  /* raised card / hover */
+    --line: 24 6% 88%;             /* subtle border */
+    --line-strong: 24 6% 78%;      /* stronger border */
+    --fg: 20 10% 10%;              /* primary text */
+    --fg-muted: 20 6% 42%;         /* secondary text */
+    --fg-subtle: 20 6% 60%;        /* tertiary text */
+    --accent: 32 96% 46%;          /* amber-600 in light: readable on white */
+    --accent-strong: 24 95% 40%;   /* amber-700 for hover */
+    --accent-fg: 20 10% 10%;       /* dark text on amber buttons */
+    --danger: 350 82% 50%;
+    --danger-fg: 0 0% 100%;
+    color-scheme: light;
+  }
 
-html,
-body {
-  background-color: rgb(10 10 10); /* neutral-950 */
-  color: rgb(245 245 245); /* neutral-100 */
+  .dark {
+    /* Dark palette */
+    --app: 0 0% 4%;
+    --surface: 0 0% 9%;
+    --surface-strong: 0 0% 13%;
+    --line: 0 0% 18%;
+    --line-strong: 0 0% 30%;
+    --fg: 0 0% 96%;
+    --fg-muted: 0 0% 65%;
+    --fg-subtle: 0 0% 45%;
+    --accent: 38 96% 55%;          /* brighter amber for dark bg */
+    --accent-strong: 38 96% 65%;
+    --accent-fg: 20 10% 10%;
+    --danger: 350 82% 60%;
+    --danger-fg: 0 0% 100%;
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    background-color: hsl(var(--app));
+    color: hsl(var(--fg));
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    /* Smooth theme transitions without flashing element sizes. */
+    transition: background-color 150ms ease, color 150ms ease;
+  }
 }
 
 @layer utilities {
@@ -20,7 +60,7 @@ body {
     padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
   }
   .press {
-    transition: transform 120ms ease;
+    transition: transform 120ms ease, background-color 150ms ease, color 150ms ease;
     touch-action: manipulation;
   }
   .press:active {

@@ -150,29 +150,29 @@ export function NewBillForm() {
           placeholder="0"
         />
       </div>
-      <div className="flex items-center justify-between gap-3 rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-neutral-300">
+      <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-surface px-3 py-2 text-sm text-fg-muted">
         <span>Currency</span>
         <input
           value={currencyCode}
           onChange={(e) => setCurrencyCode(e.target.value.toUpperCase().slice(0, 4))}
-          className="w-16 rounded-lg bg-neutral-800 px-2 py-1 text-right text-neutral-100 focus:outline-none"
+          className="w-16 rounded-lg border border-line bg-surface-strong px-2 py-1 text-right text-fg focus:border-accent focus:outline-none"
           aria-label="Currency code"
         />
       </div>
 
       <div>
-        <div className="mb-2 text-sm font-medium text-neutral-300">Items</div>
+        <div className="mb-2 text-sm font-medium text-fg">Items</div>
         <ItemsEditor items={items} onChange={setItems} currencySymbol={symbol} />
       </div>
 
       <details
         open={showHandles}
         onToggle={(event) => setShowHandles((event.target as HTMLDetailsElement).open)}
-        className="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-3"
+        className="rounded-2xl border border-line bg-surface p-3"
       >
-        <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-neutral-200">
-          Payment handles <span className="text-neutral-500">optional</span>
-          <ChevronDown className="h-4 w-4 text-neutral-400 transition-transform" />
+        <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-fg">
+          Payment handles <span className="text-fg-subtle">optional</span>
+          <ChevronDown className="h-4 w-4 text-fg-muted transition-transform" />
         </summary>
         <div className="mt-3 grid grid-cols-2 gap-2">
           <Input label="Venmo" value={venmo} onChange={(e) => setVenmo(e.target.value)} placeholder="@handle" maxLength={64} />
@@ -180,7 +180,7 @@ export function NewBillForm() {
           <Input label="UPI" value={upi} onChange={(e) => setUpi(e.target.value)} placeholder="name@bank" maxLength={64} />
           <Input label="PayPal.me" value={paypal} onChange={(e) => setPaypal(e.target.value)} placeholder="handle" maxLength={64} />
         </div>
-        <p className="mt-2 text-xs text-neutral-500">
+        <p className="mt-2 text-xs text-fg-subtle">
           Payers will see these as one-tap deep links. Anything you leave blank simply won&apos;t show up.
         </p>
       </details>

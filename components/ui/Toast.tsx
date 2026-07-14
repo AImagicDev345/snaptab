@@ -41,12 +41,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           <div
             key={t.id}
             className={[
-              "pointer-events-auto max-w-md rounded-xl border px-4 py-2 text-sm font-medium",
+              "pointer-events-auto max-w-md rounded-xl border px-4 py-2 text-sm font-medium shadow-lg",
               t.kind === "error"
-                ? "border-rose-700 bg-rose-950 text-rose-100"
+                ? "border-danger bg-danger text-danger-fg"
                 : t.kind === "success"
-                  ? "border-amber-600 bg-amber-950 text-amber-100"
-                  : "border-neutral-700 bg-neutral-900 text-neutral-100",
+                  ? "border-accent-strong bg-accent text-accent-fg"
+                  : "border-line bg-surface text-fg",
             ].join(" ")}
           >
             {t.message}

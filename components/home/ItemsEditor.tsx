@@ -44,7 +44,7 @@ export function ItemsEditor({ items, onChange, currencySymbol }: Props) {
       {items.map((item, index) => (
         <div
           key={item.key}
-          className="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-3"
+          className="rounded-2xl border border-line bg-surface p-3"
         >
           <div className="grid grid-cols-[1fr_110px_44px] gap-2">
             <Input
@@ -66,17 +66,17 @@ export function ItemsEditor({ items, onChange, currencySymbol }: Props) {
               onClick={() => remove(index)}
               disabled={items.length === 1}
               aria-label={`Remove item ${index + 1}`}
-              className="press flex items-center justify-center rounded-xl border border-neutral-800 bg-neutral-900 text-neutral-400 disabled:opacity-30 hover:text-rose-400"
+              className="press flex items-center justify-center rounded-xl border border-line bg-surface-strong text-fg-muted hover:text-danger disabled:opacity-30"
             >
               <Trash2 className="h-5 w-5" />
             </button>
           </div>
-          <label className="mt-2 flex items-center gap-2 text-sm text-neutral-400">
+          <label className="mt-2 flex items-center gap-2 text-sm text-fg-muted">
             <input
               type="checkbox"
               checked={item.is_shared}
               onChange={(e) => update(index, { is_shared: e.target.checked })}
-              className="h-4 w-4 accent-amber-500"
+              className="h-4 w-4 accent-accent"
             />
             <Users className="h-4 w-4" />
             Shared by everyone
@@ -86,7 +86,7 @@ export function ItemsEditor({ items, onChange, currencySymbol }: Props) {
       <button
         type="button"
         onClick={add}
-        className="press w-full rounded-2xl border border-dashed border-neutral-700 py-3 text-sm font-medium text-neutral-300 hover:border-amber-500 hover:text-amber-400"
+        className="press w-full rounded-2xl border border-dashed border-line-strong py-3 text-sm font-medium text-fg-muted hover:border-accent hover:text-accent"
       >
         + Add item
       </button>

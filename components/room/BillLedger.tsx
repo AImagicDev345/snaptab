@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Users } from "lucide-react";
+import { Users } from "lucide-react";
 
 import { InitialsBadge } from "@/components/ui/InitialsBadge";
 import { formatMoney } from "@/lib/format";
@@ -30,12 +30,12 @@ export function BillLedger({ session, items, participants, claims, viewerId, onT
 
   return (
     <div className="space-y-3">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-500">
+      <h2 className="text-sm font-semibold uppercase tracking-wide text-fg-subtle">
         The bill
       </h2>
 
       {viewerId && !viewerHasAnyClaim ? (
-        <p className="rounded-2xl border border-dashed border-neutral-800 bg-neutral-900/40 px-4 py-3 text-sm text-neutral-400">
+        <p className="rounded-2xl border border-dashed border-line-strong bg-surface px-4 py-3 text-sm text-fg-muted">
           Tap the items you ordered.
         </p>
       ) : null}
@@ -67,18 +67,18 @@ export function BillLedger({ session, items, participants, claims, viewerId, onT
                 className={[
                   "press no-tap-highlight w-full rounded-2xl border p-3 text-left transition-colors",
                   item.is_shared
-                    ? "border-neutral-800 bg-neutral-900/50"
+                    ? "border-line bg-surface"
                     : viewerClaimed
-                      ? "border-amber-500 bg-amber-500/10 ring-2 ring-amber-500"
-                      : "border-neutral-800 bg-neutral-900/60 hover:border-neutral-700",
+                      ? "border-accent bg-accent/10 ring-2 ring-accent"
+                      : "border-line bg-surface hover:border-line-strong hover:bg-surface-strong",
                 ].join(" ")}
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <div className="truncate text-base font-semibold text-neutral-100">
+                    <div className="truncate text-base font-semibold text-fg">
                       {item.name}
                     </div>
-                    <div className="mt-0.5 text-xs text-neutral-500">
+                    <div className="mt-0.5 text-xs text-fg-subtle">
                       {formatMoney(item.price, session.currency_code)}
                       {item.is_shared ? null : itemClaims.length > 0 ? (
                         <> · {formatMoney(perClaimer, session.currency_code)} each</>
@@ -88,7 +88,7 @@ export function BillLedger({ session, items, participants, claims, viewerId, onT
                     </div>
                   </div>
                   {item.is_shared ? (
-                    <span className="inline-flex items-center gap-1 rounded-full border border-neutral-700 px-2 py-1 text-xs text-neutral-300">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-line-strong px-2 py-1 text-xs text-fg-muted">
                       <Users className="h-3 w-3" />
                       Shared
                     </span>
@@ -109,34 +109,6 @@ export function BillLedger({ session, items, participants, claims, viewerId, onT
           );
         })}
       </ul>
-
-      <div className="mt-6 space-y-2">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-500">
-          Who&apos;s here
-        </h2>
-        <ul className="space-y-1 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-2">
-          {participants.map((p) => {
-            const isHost = session.host_participant_id === p.id;
-            return (
-              <li key={p.id} className="flex items-center gap-3 rounded-xl px-2 py-1.5">
-                <InitialsBadge nickname={p.nickname} size="sm" />
-                <span className="flex-1 truncate text-sm text-neutral-100">
-                  {p.nickname}
-                  {isHost ? (
-                    <span className="ml-2 text-xs text-neutral-500">host</span>
-                  ) : null}
-                </span>
-                {p.paid_at ? (
-                  <span className="inline-flex items-center gap-1 text-xs text-amber-400">
-                    <Check className="h-3 w-3" />
-                    paid
-                  </span>
-                ) : null}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
     </div>
   );
 }

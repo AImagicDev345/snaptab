@@ -20,7 +20,6 @@ export function Modal({ open, onClose, title, children, hideClose }: Props) {
       if (event.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
-    // Prevent body scroll while the modal is open.
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     dialogRef.current?.focus();
@@ -34,7 +33,7 @@ export function Modal({ open, onClose, title, children, hideClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 p-4 sm:items-center"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm sm:items-center"
       role="dialog"
       aria-modal="true"
       aria-label={title ?? "Dialog"}
@@ -45,17 +44,17 @@ export function Modal({ open, onClose, title, children, hideClose }: Props) {
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="relative w-full max-w-md rounded-2xl border border-neutral-800 bg-neutral-950 p-5 outline-none"
+        className="relative w-full max-w-md rounded-2xl border border-line bg-app p-5 shadow-2xl outline-none"
       >
         {title ? (
-          <h2 className="mb-3 pr-8 text-lg font-semibold text-neutral-100">{title}</h2>
+          <h2 className="mb-3 pr-8 text-lg font-semibold text-fg">{title}</h2>
         ) : null}
         {!hideClose ? (
           <button
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="press absolute right-3 top-3 rounded-full p-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-100"
+            className="press absolute right-3 top-3 rounded-full p-2 text-fg-muted hover:bg-surface hover:text-fg"
           >
             <X className="h-5 w-5" />
           </button>

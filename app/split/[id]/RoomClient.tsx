@@ -7,6 +7,7 @@ import { joinSession } from "@/app/actions/participants";
 import { markPaid } from "@/app/actions/paid";
 import { BillLedger } from "@/components/room/BillLedger";
 import { JoinTableModal } from "@/components/room/JoinTableModal";
+import { ParticipantsPanel } from "@/components/room/ParticipantsPanel";
 import { PayHostModal } from "@/components/room/PayHostModal";
 import { QrModal } from "@/components/room/QrModal";
 import { RoomHeader } from "@/components/room/RoomHeader";
@@ -224,33 +225,58 @@ export function RoomClient({
 
   const needsJoin = viewerId === null;
 
+  const onOpenPay = () => {
+    track("pay_host_opened");
+    setPayOpen(true);
+  };
+
   return (
     <>
-      <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-5 px-4 pb-40 pt-4">
+      <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col gap-5 px-4 pb-40 pt-4 lg:max-w-5xl lg:px-8 lg:pb-8">
         <RoomHeader
           session={session}
           participants={participants}
           inviteUrl={inviteUrl}
           onOpenQr={() => setQrOpen(true)}
         />
-        <BillLedger
-          session={session}
-          items={items}
-          participants={participants}
-          claims={claims}
-          viewerId={viewerId}
-          onToggleClaim={handleToggleClaim}
-        />
+
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start lg:gap-8">
+          <div className="space-y-5">
+            <BillLedger
+              session={session}
+              items={items}
+              participants={participants}
+              claims={claims}
+              viewerId={viewerId}
+              onToggleClaim={handleToggleClaim}
+            />
+            {/* Mobile: participants list stacks under the ledger */}
+            <div className="lg:hidden">
+              <ParticipantsPanel session={session} participants={participants} />
+            </div>
+          </div>
+
+          {/* Desktop right rail: sticky summary + participants */}
+          <aside className="hidden space-y-4 lg:sticky lg:top-4 lg:block">
+            <SummaryDock
+              session={session}
+              share={viewerShare}
+              paid={Boolean(viewer?.paid_at)}
+              onOpenPay={onOpenPay}
+              onTogglePaid={handleTogglePaid}
+              variant="inline"
+            />
+            <ParticipantsPanel session={session} participants={participants} />
+          </aside>
+        </div>
       </main>
 
+      {/* Mobile-only fixed dock */}
       <SummaryDock
         session={session}
         share={viewerShare}
         paid={Boolean(viewer?.paid_at)}
-        onOpenPay={() => {
-          track("pay_host_opened");
-          setPayOpen(true);
-        }}
+        onOpenPay={onOpenPay}
         onTogglePaid={handleTogglePaid}
       />
 

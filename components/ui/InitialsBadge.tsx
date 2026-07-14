@@ -20,14 +20,14 @@ export function InitialsBadge({ nickname, size = "md", title }: Props) {
     <span
       title={title ?? nickname}
       className={[
-        "relative inline-flex select-none items-center justify-center rounded-full font-bold text-white ring-2 ring-neutral-950",
+        "relative inline-flex select-none items-center justify-center rounded-full font-bold text-white ring-2 ring-app",
         sizes[size],
       ].join(" ")}
       style={{ backgroundColor: bg }}
     >
       {initials}
       {suffixMatch ? (
-        <span className="absolute -bottom-1 -right-1 rounded-full bg-neutral-950 px-1 text-[9px] font-semibold text-neutral-200 ring-1 ring-neutral-800">
+        <span className="absolute -bottom-1 -right-1 rounded-full bg-app px-1 text-[9px] font-semibold text-fg-muted ring-1 ring-line">
           #{suffixMatch[1]}
         </span>
       ) : null}

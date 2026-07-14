@@ -14,7 +14,7 @@ export function renderMarkdown(source: string): ReactNode {
   const flushParagraph = () => {
     if (paragraph.length === 0) return;
     blocks.push(
-      <p key={`p-${key++}`} className="text-sm leading-relaxed text-neutral-300">
+      <p key={`p-${key++}`} className="text-sm leading-relaxed text-fg-muted">
         {renderInline(paragraph.join(" "))}
       </p>,
     );
@@ -24,7 +24,7 @@ export function renderMarkdown(source: string): ReactNode {
   const flushList = () => {
     if (listItems.length === 0) return;
     blocks.push(
-      <ul key={`ul-${key++}`} className="ml-5 list-disc space-y-1 text-sm text-neutral-300">
+      <ul key={`ul-${key++}`} className="ml-5 list-disc space-y-1 text-sm text-fg-muted">
         {listItems.map((li, i) => (
           <li key={i}>{renderInline(li)}</li>
         ))}
@@ -40,7 +40,7 @@ export function renderMarkdown(source: string): ReactNode {
       flushParagraph();
       flushList();
       blocks.push(
-        <h1 key={`h-${key++}`} className="text-2xl font-black text-neutral-100">
+        <h1 key={`h-${key++}`} className="text-2xl font-black text-fg lg:text-3xl">
           {line.slice(2)}
         </h1>,
       );
@@ -50,7 +50,7 @@ export function renderMarkdown(source: string): ReactNode {
       flushParagraph();
       flushList();
       blocks.push(
-        <h2 key={`h-${key++}`} className="mt-4 text-lg font-semibold text-neutral-100">
+        <h2 key={`h-${key++}`} className="mt-4 text-lg font-semibold text-fg">
           {line.slice(3)}
         </h2>,
       );
@@ -84,7 +84,7 @@ function renderInline(text: string): ReactNode {
       const end = text.indexOf("**", i + 2);
       if (end !== -1) {
         parts.push(
-          <strong key={`b-${key++}`} className="font-semibold text-neutral-100">
+          <strong key={`b-${key++}`} className="font-semibold text-fg">
             {text.slice(i + 2, end)}
           </strong>,
         );
@@ -97,7 +97,7 @@ function renderInline(text: string): ReactNode {
       const end = text.indexOf(marker!, i + 1);
       if (end !== -1) {
         parts.push(
-          <em key={`i-${key++}`} className="italic text-neutral-300">
+          <em key={`i-${key++}`} className="italic text-fg-muted">
             {text.slice(i + 1, end)}
           </em>,
         );

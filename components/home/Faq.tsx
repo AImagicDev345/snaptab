@@ -23,17 +23,20 @@ const items = [
 
 export function Faq() {
   return (
-    <section aria-labelledby="faq-heading" className="space-y-2">
-      <h2 id="faq-heading" className="text-xl font-semibold text-neutral-100">
+    <section aria-labelledby="faq-heading" className="space-y-3">
+      <h2 id="faq-heading" className="text-xl font-semibold text-fg lg:text-2xl">
         FAQ
       </h2>
       <div className="space-y-2">
         {items.map((item) => (
-          <details key={item.q} className="group rounded-2xl border border-neutral-800 bg-neutral-900/60 px-4 py-3">
-            <summary className="cursor-pointer list-none text-sm font-medium text-neutral-100 marker:hidden">
+          <details
+            key={item.q}
+            className="group rounded-2xl border border-line bg-surface px-4 py-3 open:bg-surface-strong"
+          >
+            <summary className="cursor-pointer list-none text-sm font-medium text-fg marker:hidden">
               {item.q}
             </summary>
-            <p className="mt-2 text-sm text-neutral-400">{item.a}</p>
+            <p className="mt-2 text-sm text-fg-muted">{item.a}</p>
           </details>
         ))}
       </div>

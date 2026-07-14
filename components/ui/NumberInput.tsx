@@ -15,19 +15,19 @@ export const NumberInput = forwardRef<HTMLInputElement, Props>(function NumberIn
   return (
     <label className="block" htmlFor={inputId}>
       {label ? (
-        <span className="mb-1 block text-sm font-medium text-neutral-300">{label}</span>
+        <span className="mb-1 block text-sm font-medium text-fg">{label}</span>
       ) : null}
       <div
         className={[
-          "flex items-center rounded-xl border border-neutral-800 bg-neutral-900",
-          "focus-within:border-amber-500 focus-within:ring-2 focus-within:ring-amber-500/40",
-          error ? "border-rose-600" : "",
+          "flex items-center rounded-xl border border-line bg-surface",
+          "focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/30",
+          error ? "border-danger" : "",
         ]
           .filter(Boolean)
           .join(" ")}
       >
         {prefix ? (
-          <span className="pl-3 pr-1 text-neutral-500 text-base select-none">{prefix}</span>
+          <span className="pl-3 pr-1 text-fg-subtle text-base select-none">{prefix}</span>
         ) : null}
         <input
           ref={ref}
@@ -36,8 +36,8 @@ export const NumberInput = forwardRef<HTMLInputElement, Props>(function NumberIn
           inputMode="decimal"
           pattern="[0-9]*[.,]?[0-9]*"
           className={[
-            "w-full rounded-xl bg-transparent px-3 py-3 text-base text-neutral-100",
-            "placeholder:text-neutral-500 focus:outline-none",
+            "w-full rounded-xl bg-transparent px-3 py-3 text-base text-fg",
+            "placeholder:text-fg-subtle focus:outline-none",
             prefix ? "pl-1" : "",
             className,
           ]
@@ -47,9 +47,9 @@ export const NumberInput = forwardRef<HTMLInputElement, Props>(function NumberIn
         />
       </div>
       {error ? (
-        <span className="mt-1 block text-xs text-rose-400">{error}</span>
+        <span className="mt-1 block text-xs text-danger">{error}</span>
       ) : hint ? (
-        <span className="mt-1 block text-xs text-neutral-500">{hint}</span>
+        <span className="mt-1 block text-xs text-fg-subtle">{hint}</span>
       ) : null}
     </label>
   );
