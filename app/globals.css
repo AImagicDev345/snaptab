@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: rgb(10 10 10); /* neutral-950 */
+  color: rgb(245 245 245); /* neutral-100 */
+}
+
+@layer utilities {
+  .safe-pt {
+    padding-top: max(env(safe-area-inset-top), 0.75rem);
+  }
+  .safe-pb {
+    padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
+  }
+  .press {
+    transition: transform 120ms ease;
+    touch-action: manipulation;
+  }
+  .press:active {
+    transform: scale(0.98);
+  }
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
